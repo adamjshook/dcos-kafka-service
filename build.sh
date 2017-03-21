@@ -46,10 +46,10 @@ _notify_github success "Build succeeded"
 ./dcos-commons-tools/publish_aws.py \
   kafka \
   universe/ \
-  kafka-scheduler/build/distributions/*.zip \
-  kafka-config-overrider/build/distributions/*zip \
-  kafka-executor/build/distributions/*.zip \
+  build/distributions/*.zip \
   cli/dcos-kafka/dcos-kafka-darwin \
   cli/dcos-kafka/dcos-kafka-linux \
   cli/dcos-kafka/dcos-kafka.exe \
   cli/python/dist/*.whl
+
+

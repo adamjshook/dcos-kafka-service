@@ -32,13 +32,6 @@ fi
 # Run shakedown tests:
 ${REPO_ROOT_DIR}/dcos-commons-tools/run_tests.py shakedown ${REPO_ROOT_DIR}/integration/tests/ ${REPO_ROOT_DIR}/integration/requirements.txt
 
-# Run legacy dcos-tests:
-if [ -d "${REPO_ROOT_DIR}/dcos-tests" ]; then
-    ${REPO_ROOT_DIR}/dcos-commons-tools/run_tests.py dcos-tests ${REPO_ROOT_DIR}/dcos-tests/infinitytests/kafka ${REPO_ROOT_DIR}/dcos-tests/
-else
-    echo "${REPO_ROOT_DIR}/dcos-tests/ not found, skipping dcos-tests"
-fi
-
 # Tests succeeded. Out of courtesy, trigger a teardown of the cluster if we created it ourselves.
 # Don't wait for the cluster to complete teardown.
 if [ -n "${CLUSTER_CREATED}" ]; then
