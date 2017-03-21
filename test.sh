@@ -38,7 +38,7 @@ if [ -z "${!STUB_UNIVERSE_URL}" ]; then
         exit 1
     fi
     export STUB_UNIVERSE_URL=$(cat $UNIVERSE_URL_PATH)
-    #rm -f $UNIVERSE_URL_PATH
+    rm  $UNIVERSE_URL_PATH
     echo "Built/uploaded stub universe: $STUB_UNIVERSE_URL"
 else
     echo "Using provided STUB_UNIVERSE_URL: $STUB_UNIVERSE_URL"
