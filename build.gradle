@@ -33,11 +33,13 @@ dependencies {
     testCompile "mesosphere:testing:0.13.0"
 }
 
+
 distributions {
-    main {
+   main{
         baseName = 'kafka-scheduler'
+  	applicationName = 'kafka'
         version = ''
-    }
+  }
 }
 
 mainClassName = 'com.mesosphere.sdk.kafka.scheduler.Main'
