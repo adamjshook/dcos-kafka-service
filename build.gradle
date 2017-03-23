@@ -3,6 +3,8 @@ version '1.1.20-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'jacoco'
+
 
 repositories {
     mavenCentral()
@@ -33,13 +35,25 @@ dependencies {
     testCompile "mesosphere:testing:0.13.0"
 }
 
+test {
+    testLogging {
+         events "passed", "skipped", "failed"
+    }
+}
+
+check.dependsOn jacocoTestReport
+jacocoTestReport {
+    reports {
+        html.destination "${buildDir}/jacoco"
+    }
+}
 
 distributions {
-   main{
+    main{
         baseName = 'kafka-scheduler'
-  	applicationName = 'kafka'
+        applicationName = 'kafka'
         version = ''
-  }
+    }
 }
 
 mainClassName = 'com.mesosphere.sdk.kafka.scheduler.Main'
