@@ -24,6 +24,8 @@ public class BrokerConfiguration {
     private String overriderUri;
     @JsonProperty("port")
     private Long port;
+    @JsonProperty("port_range")
+    private String portRange;
     @JsonProperty("jmx")
     private JmxConfig jmx;
     @JsonProperty("statsd")
@@ -44,6 +46,7 @@ public class BrokerConfiguration {
             @JsonProperty("java_uri")String javaUri,
             @JsonProperty("overrider_uri")String overriderUri,
             @JsonProperty("port")Long port,
+            @JsonProperty("port_range")String portRange,
             @JsonProperty("jmx")JmxConfig jmx,
             @JsonProperty("statsd")StatsdConfig statsd) {
         this.cpus = cpus;
@@ -55,6 +58,7 @@ public class BrokerConfiguration {
         this.javaUri = javaUri;
         this.overriderUri = overriderUri;
         this.port = port;
+        this.portRange = portRange;
         this.jmx = jmx;
         this.statsd = statsd;
     }
@@ -138,6 +142,15 @@ public class BrokerConfiguration {
     @JsonProperty("port")
     public void setPort(Long port) {
         this.port = port;
+    }
+
+    public String getPortRange() {
+        return portRange;
+    }
+
+    @JsonProperty("port_range")
+    public void setPortRange(String portRange) {
+        this.portRange = portRange;
     }
 
     public JmxConfig getJmx() {

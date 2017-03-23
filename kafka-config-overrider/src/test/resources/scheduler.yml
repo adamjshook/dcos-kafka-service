@@ -26,6 +26,7 @@ scheduler_configuration:
     kafka_uri: ${KAFKA_URI}
     overrider_uri: ${OVERRIDER_URI}
     port: ${BROKER_PORT:-0}
+    port_range: ${BROKER_PORT_RANGE:-}
 
   kafka:
     kafka_advertise_host_ip: ${KAFKA_ADVERTISE_HOST_IP:-false}

@@ -26,6 +26,7 @@ public class KafkaTestUtils {
     public static final String testJavaUri = "test-java-uri";
     public static final String testOverriderUri = "test-overrider-uri";
     public static final Long testPort = 9092L;
+    public static final String testPortRange = "9092-10092";
     public static final int testJMXPort = 9010;
     public static final String testStatsdHost = "localhost";
     public static final int testStatsdPort = 8124;

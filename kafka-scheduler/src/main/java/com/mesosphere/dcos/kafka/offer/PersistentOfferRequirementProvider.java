@@ -50,10 +50,16 @@ public class PersistentOfferRequirementProvider implements KafkaOfferRequirement
             throws InvalidRequirementException, IOException, URISyntaxException {
         KafkaSchedulerConfiguration config = configState.fetch(UUID.fromString(configName));
         String containerPath = "kafka-volume-" + getUUID();
+
+        // If the port is not explicitly set, check the port range before allowing a random port
         Long port = config.getBrokerConfiguration().getPort();
-        if (port == 0) {
-            port = getDynamicPort();
+        if (port == 0L) {
+            String portRange = config.getBrokerConfiguration().getPortRange();
+            if (portRange != null && portRange.trim().length() > 0) {
+                port = getDynamicPort(portRange);
+            }
         }
+
         Optional<Integer> jmxPort = config.getBrokerConfiguration().getJmx().isEnabled()
                 ? Optional.of(config.getBrokerConfiguration().getJmx().getRemotePort()) : Optional.empty();
 
@@ -271,8 +277,9 @@ public class PersistentOfferRequirementProvider implements KafkaOfferRequirement
         return taskBuilder;
     }
 
-    private static Long getDynamicPort() {
-        return 9092 + ThreadLocalRandom.current().nextLong(0, 1000);
+    private static Long getDynamicPort(String portRange) {
+        String[] minMax = portRange.split("-");
+        return ThreadLocalRandom.current().nextLong(Long.parseLong(minMax[0].trim()),Long.parseLong(minMax[1].trim()));
     }
 
     private TaskInfo getNewTaskInfo(
