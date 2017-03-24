@@ -53,12 +53,18 @@ public class PersistentOfferRequirementProvider implements KafkaOfferRequirement
 
         // If the port is not explicitly set, check the port range before allowing a random port
         Long port = config.getBrokerConfiguration().getPort();
+        log.info("Port configured is " + port);
         if (port == 0L) {
             String portRange = config.getBrokerConfiguration().getPortRange();
+            log.info("Port range configured is " + portRange);
             if (portRange != null && portRange.trim().length() > 0) {
                 port = getDynamicPort(portRange);
+            } else {
+                port = getDynamicPort("31000-31100");
             }
         }
+
+        log.info("Final port is " + port);
 
         Optional<Integer> jmxPort = config.getBrokerConfiguration().getJmx().isEnabled()
                 ? Optional.of(config.getBrokerConfiguration().getJmx().getRemotePort()) : Optional.empty();
